@@ -1,0 +1,49 @@
+{
+  "info": {
+    "name": "Lunora Market API",
+    "description": "Smoke flow: health, registration, products, checkout and order history.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [{
+    "listen": "prerequest",
+    "script": {"exec": ["if (!pm.environment.get('email')) pm.environment.set('email', `postman-${Date.now()}@example.com`);"]}
+  }],
+  "item": [
+    {
+      "name": "Health",
+      "request": {"method": "GET", "url": {"raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"]}},
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('healthy', () => pm.response.to.have.status(200));"]}}]
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"name\": \"Postman Buyer\",\n  \"email\": \"{{email}}\",\n  \"password\": \"StrongPass123!\"\n}"},
+        "url": {"raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register"]}
+      },
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('created', () => pm.response.to.have.status(201));", "pm.environment.set('token', pm.response.json().access_token);"]}}]
+    },
+    {
+      "name": "Products",
+      "request": {"method": "GET", "url": {"raw": "{{baseUrl}}/api/products", "host": ["{{baseUrl}}"], "path": ["api", "products"]}},
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('products returned', () => { pm.response.to.have.status(200); pm.expect(pm.response.json().length).above(0); });", "pm.environment.set('productId', pm.response.json()[0].id);"]}}]
+    },
+    {
+      "name": "Create order",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}, {"key": "Authorization", "value": "Bearer {{token}}"}],
+        "body": {"mode": "raw", "raw": "{\n  \"shipping_address\": \"Moscow, Tverskaya street, 1\",\n  \"items\": [{\"product_id\": {{productId}}, \"quantity\": 1}]\n}"},
+        "url": {"raw": "{{baseUrl}}/api/orders", "host": ["{{baseUrl}}"], "path": ["api", "orders"]}
+      },
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('order created', () => pm.response.to.have.status(201));"]}}]
+    },
+    {
+      "name": "My orders",
+      "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": {"raw": "{{baseUrl}}/api/orders", "host": ["{{baseUrl}}"], "path": ["api", "orders"]}},
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('order visible', () => { pm.response.to.have.status(200); pm.expect(pm.response.json().length).above(0); });"]}}]
+    }
+  ]
+}
+
