@@ -8,12 +8,21 @@ from .models import Base, Product, User, UserRole
 from .security import hash_password
 
 PRODUCTS = [
-    ("Лунная кружка", "Керамическая кружка ручной работы, 350 мл.", "1290.00", 24, "Дом", "🌙"),
-    ("Свеча «Тихий лес»", "Соевый воск, хлопковый фитиль и аромат хвои.", "890.00", 32, "Ароматы", "🕯️"),
-    ("Плед Aurora", "Мягкий плед из переработанного хлопка, 140×200 см.", "3490.00", 12, "Текстиль", "🧶"),
-    ("Термобутылка Nova", "Стальная бутылка, которая держит температуру до 12 часов.", "1890.00", 18, "Аксессуары", "✨"),
-    ("Блокнот Orbit", "Недатированный блокнот в твёрдой обложке, 192 страницы.", "690.00", 40, "Канцелярия", "📓"),
-    ("Лампа Eclipse", "Компактная настольная лампа с тремя уровнями яркости.", "4290.00", 8, "Свет", "💡"),
+    ("Молоко 3,2%", "Свежее пастеризованное молоко, 1 литр.", "109.00", 40, "Молочное", "🥛"),
+    ("Хлеб бородинский", "Ароматный ржано-пшеничный хлеб, 400 г.", "79.00", 50, "Выпечка", "🍞"),
+    ("Яйца куриные C1", "Свежие куриные яйца, упаковка 10 штук.", "139.00", 30, "Молочное", "🥚"),
+    ("Яблоки Gala", "Сладкие и хрустящие яблоки, цена за 1 кг.", "169.00", 45, "Фрукты", "🍎"),
+    ("Куриное филе", "Охлаждённое филе грудки, цена за 1 кг.", "429.00", 25, "Мясо", "🍗"),
+    ("Макароны из твёрдых сортов", "Макароны группы А, упаковка 450 г.", "119.00", 36, "Бакалея", "🍝"),
+]
+
+LEGACY_NAMES = [
+    "Лунная кружка",
+    "Свеча «Тихий лес»",
+    "Плед Aurora",
+    "Термобутылка Nova",
+    "Блокнот Orbit",
+    "Лампа Eclipse",
 ]
 
 
@@ -32,6 +41,23 @@ async def init_database() -> None:
                     role=UserRole.admin,
                 )
             )
+        existing = {
+            product.name: product
+            for product in (await db.scalars(select(Product).where(Product.name.in_(LEGACY_NAMES)))).all()
+        }
+        if existing:
+            for legacy_name, product_data in zip(LEGACY_NAMES, PRODUCTS, strict=True):
+                product = existing.get(legacy_name)
+                if product is None:
+                    continue
+                name, description, price, stock, category, emoji = product_data
+                product.name = name
+                product.description = description
+                product.price = Decimal(price)
+                product.stock = stock
+                product.category = category
+                product.emoji = emoji
+
         has_products = await db.scalar(select(Product.id).limit(1))
         if has_products is None:
             for name, description, price, stock, category, emoji in PRODUCTS:

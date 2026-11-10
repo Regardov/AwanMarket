@@ -1,6 +1,6 @@
-# ☾ Lunora Market
+# AwanMarket
 
-Компактный кроссплатформенный магазин уютных товаров. Один backend обслуживает адаптивную
+Кроссплатформенный магазин обычных продуктов. Один backend обслуживает адаптивную
 NiceGUI-витрину, мобильное приложение Flutter и desktop-клиент PyQt6.
 
 ## Что уже есть
@@ -25,6 +25,8 @@ postman/           коллекция и локальное окружение
 deploy/            Caddy и инструкция production-развёртывания
 ```
 
+Инструкция для покупателей и администратора: [GITHUB_GUIDE.md](GITHUB_GUIDE.md).
+
 ## Быстрый запуск
 
 ```powershell
@@ -46,7 +48,7 @@ docker compose up --build
 ```powershell
 python -m venv .venv
 .venv\Scripts\pip install -e ".[dev]"
-$env:DATABASE_URL = "sqlite+aiosqlite:///./lunora.db"
+$env:DATABASE_URL = "sqlite+aiosqlite:///./awanmarket.db"
 .venv\Scripts\uvicorn backend.app.main:app --reload --port 8080
 ```
 
@@ -55,8 +57,8 @@ $env:DATABASE_URL = "sqlite+aiosqlite:///./lunora.db"
 ```powershell
 ruff check backend tests desktop
 pytest -q
-postman collection run postman/Lunora.postman_collection.json `
-  -e postman/Lunora.postman_environment.json
+postman collection run postman/AwanMarket.postman_collection.json `
+  -e postman/AwanMarket.postman_environment.json
 ```
 
 ## Клиенты

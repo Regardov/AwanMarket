@@ -16,7 +16,7 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(
     title=settings.app_name,
-    description="API and responsive storefront for Lunora Market",
+    description="API and responsive grocery storefront for AwanMarket",
     version="0.1.0",
     lifespan=lifespan,
 )
@@ -35,7 +35,7 @@ app.include_router(admin.router)
 
 @app.get("/health", tags=["system"])
 async def health() -> dict[str, str]:
-    return {"status": "ok", "service": "lunora-market"}
+    return {"status": "ok", "service": "awanmarket"}
 
 
 from .web import attach_nicegui  # noqa: E402

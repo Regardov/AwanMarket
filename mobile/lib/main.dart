@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const apiBase = String.fromEnvironment('API_BASE_URL', defaultValue: 'http://10.0.2.2:8080');
 
-void main() => runApp(const LunoraApp());
+void main() => runApp(const AwanMarketApp());
 
 class Product {
   Product.fromJson(Map<String, dynamic> json)
@@ -79,13 +79,13 @@ class ApiClient {
   }
 }
 
-class LunoraApp extends StatefulWidget {
-  const LunoraApp({super.key});
+class AwanMarketApp extends StatefulWidget {
+  const AwanMarketApp({super.key});
   @override
-  State<LunoraApp> createState() => _LunoraAppState();
+  State<AwanMarketApp> createState() => _AwanMarketAppState();
 }
 
-class _LunoraAppState extends State<LunoraApp> {
+class _AwanMarketAppState extends State<AwanMarketApp> {
   final api = ApiClient();
   final cart = <int, int>{};
 
@@ -98,7 +98,7 @@ class _LunoraAppState extends State<LunoraApp> {
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Lunora',
+        title: 'AwanMarket',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff637f6d)),
           scaffoldBackgroundColor: const Color(0xfff7f3eb),
@@ -130,7 +130,7 @@ class _StorePageState extends State<StorePage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: const Text('☾ LUNORA', style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 3)),
+          title: const Text('AWANMARKET', style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 2)),
           actions: [
             IconButton(
               tooltip: widget.api.token == null ? 'Войти' : 'Аккаунт',
@@ -180,11 +180,11 @@ class _StorePageState extends State<StorePage> {
                     borderRadius: BorderRadius.circular(28),
                   ),
                   child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text('ВЕЩИ С ТИХИМ ХАРАКТЕРОМ', style: TextStyle(color: Color(0xffffdf9e), letterSpacing: 2)),
+                    Text('СВЕЖЕЕ КАЖДЫЙ ДЕНЬ', style: TextStyle(color: Color(0xffffdf9e), letterSpacing: 2)),
                     SizedBox(height: 12),
-                    Text('Маленькие радости\nдля дома и тебя', style: TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.w900)),
+                    Text('Обычные продукты\nпо честным ценам', style: TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.w900)),
                     SizedBox(height: 8),
-                    Text('Уютные, честные и долговечные вещи.', style: TextStyle(color: Colors.white70)),
+                    Text('Молоко, хлеб, овощи и всё необходимое.', style: TextStyle(color: Colors.white70)),
                   ]),
                 ),
               ),

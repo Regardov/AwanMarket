@@ -1,9 +1,9 @@
-# Lunora Desktop
+# AwanMarket Desktop
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\pip install -r desktop\requirements.txt
-$env:LUNORA_API_URL = "http://127.0.0.1:8080"
+$env:AWANMARKET_API_URL = "http://127.0.0.1:8080"
 .venv\Scripts\python desktop\main.py
 ```
 

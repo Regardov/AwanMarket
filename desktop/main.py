@@ -22,7 +22,7 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-API_BASE = os.getenv("LUNORA_API_URL", "http://127.0.0.1:8080")
+API_BASE = os.getenv("AWANMARKET_API_URL", "http://127.0.0.1:8080")
 
 
 class Api:
@@ -72,7 +72,7 @@ class AuthDialog(QDialog):
     def __init__(self, api: Api, parent=None) -> None:
         super().__init__(parent)
         self.api = api
-        self.setWindowTitle("Lunora — аккаунт")
+        self.setWindowTitle("AwanMarket — аккаунт")
         self.setMinimumWidth(390)
         tabs = QTabWidget()
         tabs.addTab(self.form("login"), "Вход")
@@ -181,7 +181,7 @@ class MainWindow(QMainWindow):
         self.api = Api()
         self.products: list[dict] = []
         self.cart: dict[int, int] = defaultdict(int)
-        self.setWindowTitle("Lunora Market")
+        self.setWindowTitle("AwanMarket")
         self.resize(1120, 760)
         self.build()
         self.load_products()
@@ -190,7 +190,7 @@ class MainWindow(QMainWindow):
         root = QWidget()
         main = QVBoxLayout(root)
         nav = QHBoxLayout()
-        logo = QLabel("☾  L U N O R A")
+        logo = QLabel("A W A N M A R K E T")
         logo.setObjectName("logo")
         self.status = QLabel("Гость")
         login = QPushButton("Войти")
@@ -206,14 +206,14 @@ class MainWindow(QMainWindow):
         hero = QFrame()
         hero.setObjectName("hero")
         hero_layout = QVBoxLayout(hero)
-        overline = QLabel("ВЕЩИ С ТИХИМ ХАРАКТЕРОМ")
+        overline = QLabel("СВЕЖЕЕ КАЖДЫЙ ДЕНЬ")
         overline.setObjectName("overline")
-        headline = QLabel("Маленькие радости\nдля дома и тебя")
+        headline = QLabel("Обычные продукты\nпо честным ценам")
         headline.setObjectName("headline")
         hero_layout.addStretch()
         hero_layout.addWidget(overline)
         hero_layout.addWidget(headline)
-        hero_layout.addWidget(QLabel("Уютные, честные и долговечные вещи — без лишнего шума."))
+        hero_layout.addWidget(QLabel("Молоко, хлеб, овощи и всё необходимое в одном магазине."))
         hero_layout.addStretch()
         main.addWidget(hero)
         scroll = QScrollArea()

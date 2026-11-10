@@ -5,12 +5,12 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    app_name: str = "Lunora Market"
+    app_name: str = "AwanMarket"
     environment: str = "development"
-    database_url: str = "sqlite+aiosqlite:///./lunora.db"
+    database_url: str = "sqlite+aiosqlite:///./awanmarket.db"
     secret_key: str = "development-secret-change-before-production"
     access_token_expire_minutes: int = 1440
-    admin_email: str = "admin@lunora.shop"
+    admin_email: str = "admin@awanmarket.shop"
     admin_password: str = "ChangeMe123!"
     cors_origins: list[str] | str = ["http://localhost:8080"]
 

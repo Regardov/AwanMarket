@@ -68,7 +68,7 @@ def add_to_cart(product_id: int) -> None:
 async def header() -> None:
     user = await current_user()
     with ui.header().classes("items-center no-wrap px-3 md:px-10 h-18"):
-        ui.link("☾ LUNORA", "/").classes("brand text-xl font-black tracking-widest no-underline text-slate-800")
+        ui.link("AWANMARKET", "/").classes("brand text-xl font-black tracking-widest no-underline text-slate-800")
         ui.space()
         with ui.row().classes("desktop-nav items-center gap-6"):
             ui.link("Каталог", "/#catalog").classes("no-underline text-slate-700")
@@ -108,12 +108,12 @@ async def storefront() -> None:
     with ui.column().classes("w-full max-w-7xl mx-auto px-4 md:px-8 py-8 gap-14"):
         with ui.row().classes("hero w-full p-8 md:p-16 items-center"):
             with ui.column().classes("max-w-2xl gap-5 z-10"):
-                ui.label("ВЕЩИ С ТИХИМ ХАРАКТЕРОМ").classes("text-xs tracking-[.28em] text-amber-200")
-                ui.label("Маленькие радости для дома и тебя").classes(
+                ui.label("СВЕЖЕЕ КАЖДЫЙ ДЕНЬ").classes("text-xs tracking-[.28em] text-amber-200")
+                ui.label("Обычные продукты по честным ценам").classes(
                     "text-4xl md:text-6xl font-black leading-tight"
                 )
                 ui.label(
-                    "Собрали уютные, честные и долговечные вещи — без лишнего шума."
+                    "Молоко, хлеб, овощи и всё необходимое — просто выберите и закажите."
                 ).classes("text-lg text-slate-100 max-w-xl")
                 ui.button("Смотреть коллекцию", on_click=lambda: ui.run_javascript(
                     "document.getElementById('catalog').scrollIntoView({behavior:'smooth'})"
@@ -121,8 +121,8 @@ async def storefront() -> None:
         with ui.column().classes("w-full gap-5").props('id="catalog"'):
             with ui.row().classes("w-full items-end"):
                 with ui.column().classes("gap-1"):
-                    ui.label("Наша коллекция").classes("text-3xl font-black")
-                    ui.label("Каждый товар выбран с вниманием к деталям.").classes("muted")
+                    ui.label("Популярные продукты").classes("text-3xl font-black")
+                    ui.label("Всё самое нужное для ежедневных покупок.").classes("muted")
             async with SessionLocal() as db:
                 products = (
                     await db.scalars(
@@ -152,8 +152,8 @@ async def storefront() -> None:
         with ui.row().classes("w-full soft-card p-8 md:p-12 items-center gap-8"):
             ui.label("✦").classes("text-6xl text-amber-500")
             with ui.column().classes("gap-1"):
-                ui.label("Lunora — меньше случайного, больше любимого").classes("text-2xl font-bold")
-                ui.label("Бережная упаковка · Честные материалы · Поддержка без ботов").classes("muted")
+                ui.label("AwanMarket — продукты рядом").classes("text-2xl font-bold")
+                ui.label("Свежие товары · Понятные цены · Быстрое оформление").classes("muted")
 
 
 @ui.page("/login")
@@ -357,6 +357,6 @@ def attach_nicegui(fastapi_app: FastAPI) -> None:
         fastapi_app,
         storage_secret=settings.secret_key,
         title=settings.app_name,
-        favicon="🌙",
+        favicon="🛒",
     )
 

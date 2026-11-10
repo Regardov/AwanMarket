@@ -1,2 +1,2 @@
-"""Lunora Market server package."""
+"""AwanMarket server package."""
 

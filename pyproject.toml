@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "lunora-market"
+name = "awanmarket"
 version = "0.1.0"
-description = "A compact cross-platform shop powered by FastAPI, PostgreSQL and NiceGUI"
+description = "A cross-platform grocery store powered by FastAPI, PostgreSQL and NiceGUI"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

@@ -1,4 +1,4 @@
-# Lunora Mobile
+# AwanMarket Mobile
 
 The Flutter SDK was not available when this repository was generated, so platform wrappers are
 created once on a development machine:

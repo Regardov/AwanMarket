@@ -1,2 +1,2 @@
-"""FastAPI application for Lunora Market."""
+"""FastAPI application for AwanMarket."""
 

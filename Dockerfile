@@ -9,8 +9,8 @@ COPY pyproject.toml README.md ./
 COPY backend ./backend
 RUN pip install --upgrade pip && pip install .
 
-RUN useradd --create-home --uid 10001 lunora && chown -R lunora:lunora /app
-USER lunora
+RUN useradd --create-home --uid 10001 awanmarket && chown -R awanmarket:awanmarket /app
+USER awanmarket
 
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
