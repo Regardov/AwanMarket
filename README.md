@@ -10,7 +10,7 @@ NiceGUI-витрину, мобильное приложение Flutter и deskt
 - история заказов и смена их статусов администратором;
 - CRUD товаров, пользователи, заказы и статистика в API/веб-админке;
 - адаптивный NiceGUI-интерфейс для телефона и компьютера;
-- отдельные Flutter и PyQt6 клиенты;
+- Flutter и PyQt6 клиенты с поиском, фильтрами, сохранением корзины и историей заказов;
 - PostgreSQL, Docker, healthcheck, Caddy + HTTPS и CI;
 - Swagger (`/docs`) и готовая Postman-коллекция.
 
@@ -57,6 +57,8 @@ $env:DATABASE_URL = "sqlite+aiosqlite:///./awanmarket.db"
 ```powershell
 ruff check backend tests desktop
 pytest -q
+# Проверки desktop: pip install -r desktop/requirements-dev.txt
+# pytest -q desktop/tests
 postman collection run postman/AwanMarket.postman_collection.json `
   -e postman/AwanMarket.postman_environment.json
 ```

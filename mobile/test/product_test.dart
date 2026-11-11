@@ -17,4 +17,3 @@ void main() {
     expect(product.price, 109);
   });
 }
-

@@ -19,10 +19,13 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: "3.47.9"
           cache: true
-      - run: flutter create --platforms=android .
       - run: flutter pub get
-      - run: flutter build apk --release --dart-define=API_BASE_URL=${{ inputs.api_base_url }}
+      - name: Build Android APK
+        env:
+          API_BASE_URL: ${{ inputs.api_base_url }}
+        run: flutter build apk --release --dart-define="API_BASE_URL=$API_BASE_URL"
       - uses: actions/upload-artifact@v4
         with:
           name: AwanMarket-Android
