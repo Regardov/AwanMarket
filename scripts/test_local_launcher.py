@@ -72,7 +72,7 @@ exit $LASTEXITCODE
         secret = next(line for line in env.splitlines() if line.startswith("SECRET_KEY="))
         self.assertRegex(secret, r"^SECRET_KEY=[a-f0-9]{64}$")
         up = next(call for call in self.calls() if "up" in call)
-        self.assertIn(str(self.project / "docker-compose.yml"), up)
+        self.assertTrue(os.path.samefile(up[up.index("--file") + 1], self.project / "docker-compose.yml"))
         self.assertIn("--wait", up)
         self.assertIn("--build", up)
         self.assertEqual(self.browser_log.read_text(), "http://localhost:8080")

@@ -34,8 +34,8 @@ AWANMARKET_API_URL=http://127.0.0.1:8080 .venv/bin/python -m desktop.main
 ```bash
 pip install -r desktop/requirements-dev.txt
 # На машине без дисплея:
-QT_QPA_PLATFORM=offscreen pytest -q desktop/tests
-# На Windows: pytest -q desktop/tests
+QT_QPA_PLATFORM=offscreen python -m pytest -q desktop/tests
+# На Windows: python -m pytest -q desktop/tests
 pip install pyinstaller
 pyinstaller --onefile --windowed --name AwanMarket desktop/main.py
 ```
