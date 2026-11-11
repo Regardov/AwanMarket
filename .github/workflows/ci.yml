@@ -49,3 +49,12 @@ jobs:
           cache: pip
       - run: pip install -r desktop/requirements-dev.txt
       - run: pytest -q desktop/tests
+
+  windows-launcher:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/test_local_launcher.py

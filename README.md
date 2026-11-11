@@ -27,11 +27,29 @@ deploy/            Caddy и инструкция production-развёртыва
 
 Инструкция для покупателей и администратора: [GITHUB_GUIDE.md](GITHUB_GUIDE.md).
 
-## Быстрый запуск
+## Быстрый запуск в Windows
 
-```powershell
-Copy-Item .env.example .env
-docker compose up --build
+1. Установите [Docker Desktop](https://www.docker.com/products/docker-desktop/) и запустите его в режиме Linux containers.
+2. Скачайте репозиторий через **Code → Download ZIP** и распакуйте архив либо выполните `git clone`.
+3. Дважды нажмите **`start-site.bat`** в корне проекта. Python отдельно устанавливать не нужно.
+
+Скрипт создаст `.env` из примера с индивидуальным `SECRET_KEY`, соберёт контейнеры,
+дождётся готовности магазина и откроет <http://localhost:8080>. Первый запуск может
+занять несколько минут. Если Docker Desktop установлен, но закрыт, скрипт попробует
+запустить его автоматически. При ошибке окно останется открытым с сообщением.
+Существующий `.env` сохраняется без изменений. Учётные данные администратора находятся
+в `ADMIN_EMAIL` / `ADMIN_PASSWORD` этого файла.
+
+Для остановки дважды нажмите **`stop-site.bat`**. База данных сохраняется между запусками;
+закрытие браузера не останавливает контейнеры. Порт `8080` должен быть свободен.
+Скрипты вызывают `scripts/local-site.ps1` через штатный Windows PowerShell 5.1+.
+
+### Запуск из терминала (Windows, Linux, macOS)
+
+Скопируйте `.env.example` в `.env`, затем:
+
+```bash
+docker compose --project-name awanmarket up --build
 ```
 
 Откройте:
