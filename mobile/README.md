@@ -32,6 +32,22 @@ flutter run --dart-define=API_BASE_URL=http://localhost:8080
 
 ## Сборка и проверки
 
+### Скачать APK из GitHub Actions
+
+После push в `main` или открытия pull request workflow **CI** собирает debug APK
+и сохраняет его на 30 дней. Откройте репозиторий → **Actions** → **CI** → нужный
+запуск → **Artifacts** → **AwanMarket-Android-debug**. Скачайте ZIP и распакуйте
+`app-debug.apk`. Для скачивания нужно войти в GitHub. Debug-сборка использует
+адрес API по умолчанию из приложения; для физического телефона используйте
+ручную сборку с доступным ему адресом backend.
+
+Для release APK откройте **Actions** → **Build AwanMarket clients** →
+**Run workflow**, укажите публичный HTTPS-адрес backend в `api_base_url`
+и запустите сборку. Артефакт **AwanMarket-Android** содержит `app-release.apk`
+и также хранится 30 дней.
+
+### Локальная сборка
+
 ```bash
 flutter analyze
 flutter test
